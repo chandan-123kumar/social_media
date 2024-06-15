@@ -10,7 +10,6 @@ const fetchPost = async () => {
     await axios.get('http://localhost:3000/api/popular-post?unit=day', config)
     .then(response => {
         posts = response.data;
-        console.log(posts);
     })
     .catch(error => {
         console.error(`Error posting event ${iteration + 1}:`, error);
@@ -43,7 +42,6 @@ const produceRandomEvents = () => {
             };
         }
         const jsonData = JSON.stringify(postData);
-        console.log(jsonData);
         // Post the event data
         axios.post('http://localhost:3000/api/handleEvent', jsonData, config)
             .then(response => {
@@ -112,6 +110,6 @@ const start = async () => {
         console.log('No posts fetched, unable to produce events.');
     }
 };
-
+//producePost();
 start();
-producePost();
+

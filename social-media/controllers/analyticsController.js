@@ -20,14 +20,25 @@ const getTimeRange = (unit) => {
     return { startTime, endTime: now };
 };
 
+const weights = {
+    likes: 1,
+    comments: 2,
+    shares: 3
+};
+
 const getPopularPosts = async (unit) => {
     const { startTime, endTime } = getTimeRange(unit);
-    const popularPosts = await Post.aggregate([
-        { $match: { updatedAt: { $gte: startTime, $lte: endTime } } }
-    ])
-    .sort({ updatedAt: -1, likes_count: -1, comments_count: -1, shares_count: -1 })
-    .limit(10);
-    return popularPosts;
+    const posts = await Post.find(
+        { updatedAt: { $gte: startTime } }
+    );
+    const postsWithScores = posts.map(post => {
+        const popularity_score = (post.likes_count * weights.likes) +
+                                 (post.comments_count * weights.comments) +
+                                 (post.shares_count * weights.shares);
+        return { ...post.toObject(), popularity_score };
+    });
+    postsWithScores.sort((a, b) => b.popularity_score - a.popularity_score);
+    return postsWithScores.slice(0, 10);
 };
 
 const getActiveUsers = async (unit) => {
