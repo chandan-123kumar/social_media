@@ -4,7 +4,7 @@ const eventController = require('../controllers/eventController');
 const postControllerAnalytics = require('../controllers/analyticsController');
 
 router.post('/handleEvent', eventController.handleEvent);
-router.get('/popular', postControllerAnalytics.getPopularPosts);
+router.get('/popular-post', postControllerAnalytics.getPopularPosts);
 router.get('/active-user', postControllerAnalytics.getActiveUsers);
 
 module.exports = router;

@@ -85,16 +85,32 @@ const handleUnlike = async (msg) => {
 
 // Function to handle commenting on a post
 const handleComment = async (msg) => {
-    const { user_id, post_id, comment } = msg;
-    // Handle comment logic
-    console.log('Comment added by user', user_id, 'on post', post_id, ':', comment);
+    const { post_id } = msg;
+    try {
+        const post = await Post.findOneAndUpdate(
+            { post_id: post_id },
+            { $inc: { comments_count: 1 }, $set: { updatedAt: new Date() } },
+            { upsert: true, new: true }
+        );
+        console.log('Post received one comment:', post);
+    } catch (err) {
+        console.log('Error commenting post:', err.message);
+    }
 };
 
 // Function to handle deleting a comment
 const handleDeleteComment = async (msg) => {
-    const { user_id, post_id, comment_id } = msg;
-    // Handle delete comment logic
-    console.log('Comment deleted by user', user_id, 'on post', post_id, ':', comment_id);
+    const { post_id } = msg;
+    try {
+        const post = await Post.findOneAndUpdate(
+            { post_id: post_id },
+            { $inc: { comments_count: -1 }, $set: { updatedAt: new Date() } },
+            { upsert: true, new: true }
+        );
+        console.log('Post received one uncomment:', post);
+    } catch (err) {
+        console.log('Error uncommenting post:', err.message);
+    }
 };
 
 // Function to handle sharing a post

@@ -22,13 +22,11 @@ const getTimeRange = (unit) => {
 
 const getPopularPosts = async (unit) => {
     const { startTime, endTime } = getTimeRange(unit);
-
-    const popularPosts = await Post.find({
-        updatedAt: { $gte: startTime, $lte: endTime }
-    })
+    const popularPosts = await Post.aggregate([
+        { $match: { updatedAt: { $gte: startTime, $lte: endTime } } }
+    ])
     .sort({ updatedAt: -1, likes_count: -1, comments_count: -1, shares_count: -1 })
     .limit(10);
-
     return popularPosts;
 };
 
@@ -44,7 +42,7 @@ const getActiveUsers = async (unit) => {
 
 exports.getPopularPosts = async (req, res) => {
     const { unit } = req.query; // unit can be "minute", "hour", or "day"
-
+    console.log(unit);
     if (!['minute', 'hour', 'day'].includes(unit)) {
         return res.status(400).json({ error: 'Invalid time unit' });
     }
