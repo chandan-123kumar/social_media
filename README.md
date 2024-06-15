@@ -1,6 +1,12 @@
 npm install amqplib
-
 brew services restart rabbitmq
+install node and mongo db on local
+
+go to root of project fiolder install the dependency 
+npm install
+#start the service
+npm run dev
+
 
 
 
