@@ -1,3 +1,7 @@
+# High Level Diagram and basic document schema
+
+https://github.com/chandan-123kumar/social_media/blob/main/social-media/report/diagram-and-discussion/discussion.md
+
 # Machine local setup 
 npm install amqplib
 
