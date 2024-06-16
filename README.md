@@ -9,7 +9,7 @@ brew services restart rabbitmq
 ```
 install node and mongo db on local
 
-## Refer config folder for db and rabitmq settings
+## Refer config folder for db and rabbitmq settings
 
 https://github.com/chandan-123kumar/social_media/tree/main/social-media/config
 
@@ -31,7 +31,7 @@ npm run dev
 
 Step 1
 ```
-node social-media/automation/script.js
+node automation/script.js
 ```
  (This will first create some dummy posts stop it after few minutes)
 
@@ -41,9 +41,12 @@ node social-media/automation/script.js
 
 Run
 ```
-node social-media/automation/script.js
+node automation/script.js
 ```
 (This will do dummy like share login, logout etc events)
+
+# Monitor queue
+http://localhost:15672/#/queues
 
 # Unit Test
 
