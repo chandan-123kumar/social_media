@@ -3,37 +3,54 @@
 https://github.com/chandan-123kumar/social_media/blob/main/social-media/report/diagram-and-discussion/discussion.md
 
 # Machine local setup 
+```
 npm install amqplib
-
 brew services restart rabbitmq
-
+```
 install node and mongo db on local
+
+## Refer config folder for db and rabitmq settings
+
+https://github.com/chandan-123kumar/social_media/tree/main/social-media/config
 
 go to root of project fiolder install the dependency 
 
+```
+cd root_folder_of_project
 npm install
+```
 
 
 # start the service
 
+```
 npm run dev
+```
 
 # Testing 
 
 Step 1
-
-node social-media/automation/script.js (This will first create some dummy posts stop it after few minutes)
+```
+node social-media/automation/script.js
+```
+ (This will first create some dummy posts stop it after few minutes)
 
 # In social-media/automation/test.js comment // producePost();
 
 # uncomment start() method
 
-Run : node social-media/automation/script.js
+Run
+```
+node social-media/automation/script.js
+```
 (This will do dummy like share login, logout etc events)
 
 # Unit Test
 
-Run: npm run test
+Run
+```
+npm run test
+```
 
 Visit URL in the browser
 
@@ -65,14 +82,15 @@ http://localhost:3000/api/popular-post?unit=hour
 
 Curl command to share some post
 
+```
 curl --location 'http://localhost:3000/api/handleEvent' \
 --header 'Content-Type: application/json' \
 --data '{
     "user_id": "user12839348",
     "post_id": "57e96ab6-34f3-4d13-a67f-1843734bfdcb",
     "event_type": "share"
-}
-'
+}'
+```
 
 possible value of event type
 ['like', 'unlike', 'share', 'comment', 'login', 'logout', 'delete_comment']
