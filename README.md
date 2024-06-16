@@ -45,6 +45,9 @@ node automation/script.js
 ```
 (This will do dummy like share login, logout etc events)
 
+# Monitor queue
+http://localhost:15672/#/queues
+
 # Unit Test
 
 Run
