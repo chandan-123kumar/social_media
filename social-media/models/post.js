@@ -12,10 +12,8 @@ const post = new mongoose.Schema({
 });
 
 // Index on post_id for quick retrieval
+// Index on  updatedAt for quick retrieval based on timestam used to fetch popular post in past timerange(minute, hour, day)
 post.index({ post_id: 1 });
 post.index({ updatedAt: 1 });
-
-// Compound index on updatedAt, likes_count, comments_count, and shares_count for sorting by popularity
-post.index({ updatedAt: -1, likes_count: -1, comments_count: -1, shares_count: -1 });
 
 module.exports = mongoose.model('Post', post);

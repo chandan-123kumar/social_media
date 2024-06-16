@@ -18,14 +18,28 @@ npm run dev
 
 Step 1
 
-node social-media/automation/test.js (This will first create some dummy posts stop it after few minutes)
+node social-media/automation/script.js (This will first create some dummy posts stop it after few minutes)
 
 # In social-media/automation/test.js comment // producePost();
 
 # uncomment start() method
 
-Run : node social-media/automation/test.js (This will first create some dummy posts stop it after few minutes)
+Run : node social-media/automation/script.js
 (This will do dummy like share login, logout etc events)
+
+# Unit Test
+
+Run: npm run test
+
+Visit URL in the browser
+
+file:///{your user folder}/social-media/coverage/index.html
+
+e.g file:///Users/chandankumar/Desktop/richpanel/social-media/coverage/index.html
+
+For ref attached screenshot here
+
+https://github.com/chandan-123kumar/social_media/tree/main/social-media/report/unit_test_coverage
 
 Analytics 
 

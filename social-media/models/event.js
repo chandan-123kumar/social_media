@@ -9,6 +9,7 @@ const event = new mongoose.Schema({
         timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
     }
 );
+// indexing on updatedAt helps to calculate active user in last time range(i.e minute, hour, day)
 event.index({ updatedAt: 1 });
 
 module.exports = mongoose.model('Event', event);
