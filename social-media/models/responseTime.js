@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ResponseTime = new mongoose.Schema({
+const responseTime = new mongoose.Schema({
     path: { type: String, required: true },
     time: { type: Number, required: true },
 
@@ -8,6 +8,6 @@ const ResponseTime = new mongoose.Schema({
  {
     timestamps: { createdAt: 'createdAt', updatedAt: 'updatedAt' }
 });
-ResponseTime.index({ path: 1 });
+responseTime.index({ path: 1 });
 
-module.exports = mongoose.model('ResponseTime', ResponseTime);
+module.exports = mongoose.model('ResponseTime', responseTime);

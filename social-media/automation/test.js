@@ -67,7 +67,7 @@ const produceRandomEvents = () => {
 };
 
 const producePost = () => {
-    const totalIterations = 1800 / 10; // 1800 seconds / 2 seconds per interval
+    const totalIterations = 1800 / 2; // 1800 seconds / 2 seconds per interval
 
     let iteration = 0;
 
@@ -94,7 +94,7 @@ const producePost = () => {
 
         // Check if all iterations are complete
         if (iteration < totalIterations) {
-            setTimeout(createPost, 10000); // Schedule next event after 2 seconds
+            setTimeout(createPost, 2000); // Schedule next event after 2 seconds
         } else {
             console.log('Event production completed.');
         }

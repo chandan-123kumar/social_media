@@ -1,5 +1,6 @@
 const Post = require('../models/post');
 const Event = require('../models/event');
+const ResponseTime = require('../models/responseTime');
 
 const getTimeRange = (unit) => {
     const now = new Date();
@@ -51,6 +52,7 @@ const getActiveUsers = async (unit) => {
     return activeUsers;
 }
 
+
 exports.getPopularPosts = async (req, res) => {
     const { unit } = req.query; // unit can be "minute", "hour", or "day"
     console.log(unit);
@@ -65,10 +67,17 @@ exports.getPopularPosts = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
-
+exports.getResponseTime = async(req, res) => {
+    const { path } = req.query;
+    try {
+        const responseTime = await ResponseTime.find({ path: path });
+        res.status(200).json(responseTime);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
 exports.getActiveUsers = async (req, res) => {
     const { unit } = req.query; // unit can be "minute", "hour", or "day"
-    console.log(unit);
     if (!['minute', 'hour', 'day'].includes(unit)) {
         return res.status(400).json({ error: 'Invalid time unit' });
     }

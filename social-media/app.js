@@ -7,7 +7,7 @@ const app = express();
 const config = require('config');
 const port = process.env.PORT || 3000;
 const connectDB = require('./config/db');
-const responseTime = require('./models/responseTime');
+const ResponseTime = require('./models/responseTime');
 
 // Middleware
 app.use(bodyParser.json());
@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     res.on('finish', async() => {
         const elapsedHrTime = process.hrtime(startHrTime);
         const elapsedTimeInMs = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
-        const response = new responseTime({
+        const response = new ResponseTime({
             path: req.path,
             time: elapsedTimeInMs.toFixed(3)
         });
