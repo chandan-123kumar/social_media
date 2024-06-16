@@ -20,7 +20,7 @@ Step 1
 
 node social-media/automation/test.js (This will first create some dummy posts stop it after few minutes)
 
-# comment // producePost();
+# In social-media/automation/test.js comment // producePost();
 
 # uncomment start() method
 
