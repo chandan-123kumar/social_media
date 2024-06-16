@@ -110,6 +110,6 @@ const start = async () => {
         console.log('No posts fetched, unable to produce events.');
     }
 };
-//producePost();
-start();
+producePost();
+//start();
 
