@@ -51,7 +51,6 @@ const handleLogout = async (msg) => {
      console.log('User logged out:', user_id);
 };
 
-// Function to handle liking a post
 const handleLike = async (msg) => {
     const { post_id } = msg;
 
@@ -67,7 +66,6 @@ const handleLike = async (msg) => {
     }
 };
 
-// Function to handle unliking a post
 const handleUnlike = async (msg) => {
     const { post_id } = msg;
 
@@ -83,7 +81,6 @@ const handleUnlike = async (msg) => {
     }
 };
 
-// Function to handle commenting on a post
 const handleComment = async (msg) => {
     const { post_id } = msg;
     try {
