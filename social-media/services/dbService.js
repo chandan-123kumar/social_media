@@ -1,6 +1,7 @@
 const Event = require('../models/event');
 const Post = require('../models/post');
 const User = require('../models/user');
+const logger = require('../config/logger');
 const { v4: uuidv4 } = require('uuid');
 
 // Function to handle creating a post
@@ -15,7 +16,7 @@ const handleCreatePost = async (msg) => {
     try {
         const newPost = await post.save();
     } catch (err) {
-        console.log('Error creating post:', err.message);
+        logger.error('Error creating post:', err.message)
     }
 };
 
@@ -30,9 +31,9 @@ const handleLogin = async (msg) => {
             { upsert: true, new: true }
         );
     } catch (err) {
-        console.log('loginCount updated:', err.message);
+        logger.error('loginCount not updated:', err.message);
     }
-    console.log('User logged in:', user_id);
+    logger.info(`User logged in: ${user_id}`);
 };
 
 // Function to handle logout
@@ -46,9 +47,9 @@ const handleLogout = async (msg) => {
              { upsert: true, new: true }
          );
      } catch (err) {
-         console.log('logoutCount updated:', err.message);
+         logger.error('logoutCount updated:', err.message);
      }
-     console.log('User logged out:', user_id);
+     logger.info(`User logged out: ${user_id}`);
 };
 
 const handleLike = async (msg) => {
@@ -60,9 +61,8 @@ const handleLike = async (msg) => {
             { $inc: { likes_count: 1 }, $set: { updatedAt: new Date() } },
             { upsert: true, new: true }
         );
-        console.log('Post liked:', post);
     } catch (err) {
-        console.log('Error liking post:', err.message);
+        logger.error('Error liking post:', err.message);
     }
 };
 
@@ -75,9 +75,8 @@ const handleUnlike = async (msg) => {
             { $inc: { likes_count: -1 }, $set: { updatedAt: new Date() } },
             { upsert: true, new: true }
         );
-        console.log('Post unliked:', post);
     } catch (err) {
-        console.log('Error unliking post:', err.message);
+        logger.error('Error unliking post:', err.message);
     }
 };
 
@@ -89,9 +88,8 @@ const handleComment = async (msg) => {
             { $inc: { comments_count: 1 }, $set: { updatedAt: new Date() } },
             { upsert: true, new: true }
         );
-        console.log('Post received one comment:', post);
     } catch (err) {
-        console.log('Error commenting post:', err.message);
+        logger.error('Error commenting post:', err.message);
     }
 };
 
@@ -104,9 +102,8 @@ const handleDeleteComment = async (msg) => {
             { $inc: { comments_count: -1 }, $set: { updatedAt: new Date() } },
             { upsert: true, new: true }
         );
-        console.log('Post received one uncomment:', post);
     } catch (err) {
-        console.log('Error uncommenting post:', err.message);
+        logger.error('Error uncommenting post:', err.message);
     }
 };
 
@@ -119,10 +116,9 @@ const handleShare = async (msg) => {
             { post_id: post_id },
             { $inc: { shares_count: 1 }, $set: { updatedAt: new Date() } },
             { upsert: true, new: true }
-        );
-        console.log('Post shared:', post);
+        )
     } catch (err) {
-        console.log('Error sharing post:', err.message);
+        logger.error('Error sharing post:', err.message);
     }
 };
 
@@ -138,7 +134,6 @@ const handleEvent = async (msg) => {
 
     try {
         await event.save();
-        console.log('Event saved:', event);
 
         switch (event_type) {
             case 'login':
@@ -166,10 +161,10 @@ const handleEvent = async (msg) => {
                 await handleShare(msg);
                 break;
             default:
-                console.log('Invalid event type:', event_type);
+                logger.info(`Invalid event type: ${event_type}`);
         }
     } catch (err) {
-        console.log('Error handling event:', err.message);
+        logger.info('Error handling event:', err.message);
     }
 }
 

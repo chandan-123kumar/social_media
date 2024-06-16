@@ -2,6 +2,7 @@ const amqp = require('amqplib/callback_api');
 const MongoClient = require('mongodb').MongoClient;
 const connectRabbitMQ = require('../config/rabbitmq');
 const { handleEvent } = require('./dbService');
+const logger = require('../config/logger');
 
 const mongoURL = 'mongodb://localhost:27017';
 const dbName = 'social_media';
@@ -9,14 +10,18 @@ let db;
 
 // Connect to MongoDB
 MongoClient.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-  if (err) throw err;
+  if (err) {
+    logger.error('Error connecting to mogno client', err)
+  };
   db = client.db(dbName);
-  console.log('Connected to MongoDB');
+  logger.info('Connected to MongoDB');
 });
 
 // Connect to RabbitMQ and consume messages
 connectRabbitMQ((err, channel) => {
-  if (err) throw err;
+  if (err) {
+    logger.error("can't connect to consume", err);
+  };
 
   const queue = 'event';
 

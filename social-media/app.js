@@ -5,11 +5,23 @@ const rabbitmqConsumer = require('./services/rabbitmqConsumer');
 const userRoutes = require('./routes/appRoutes');
 const app = express();
 const config = require('config');
+const expressWinston = require('express-winston');
 const port = process.env.PORT || 3000;
 const connectDB = require('./config/db');
 const ResponseTime = require('./models/responseTime');
+const logger = require('./config/logger');
 
 // Middleware
+app.use(expressWinston.logger({
+    winstonInstance: logger,
+    meta: true, // Log the meta data about the request
+    msg: "HTTP {{req.method}} {{req.url}}", // Define the message to log
+    colorize: false,
+    ignoreRoute: function (req, res) { return false; } // Don't log routes that match this function
+}));
+app.use(expressWinston.errorLogger({
+    winstonInstance: logger
+}));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
     const startHrTime = process.hrtime();
@@ -24,7 +36,7 @@ app.use((req, res, next) => {
         try {
             const newEntry = await response.save();
         } catch (err) {
-            console.log('Error saving response Time:', err.message);
+            logger.error('Error saving response Time:', err.message);
         }
     });
 
@@ -41,10 +53,10 @@ const startServer = async () => {
     try {
         await connectDB();
         app.listen(3000, () => {
-            console.log('Server is running on port 3000');
+            logger.info(`Server is running on port ${port}`);
         });
     } catch (error) {
-        console.error('Failed to start server', error);
+        logger.error('Failed to start server', error);
     }
 };
 startServer();

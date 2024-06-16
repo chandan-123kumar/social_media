@@ -55,7 +55,6 @@ const getActiveUsers = async (unit) => {
 
 exports.getPopularPosts = async (req, res) => {
     const { unit } = req.query; // unit can be "minute", "hour", or "day"
-    console.log(unit);
     if (!['minute', 'hour', 'day'].includes(unit)) {
         return res.status(400).json({ error: 'Invalid time unit' });
     }
