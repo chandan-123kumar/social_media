@@ -1,3 +1,4 @@
+# Machine local setup 
 npm install amqplib
 
 brew services restart rabbitmq
@@ -9,19 +10,19 @@ go to root of project fiolder install the dependency
 npm install
 
 
-#start the service
+# start the service
 
 npm run dev
 
-#Testing 
+# Testing 
 
 Step 1
 
 node social-media/automation/test.js (This will first create some dummy posts stop it after few minutes)
 
-comment // producePost();
+# comment // producePost();
 
-uncomment start() method
+# uncomment start() method
 
 Run : node social-media/automation/test.js (This will first create some dummy posts stop it after few minutes)
 (This will do dummy like share login, logout etc events)
