@@ -62,9 +62,9 @@ For ref attached screenshot here
 
 https://github.com/chandan-123kumar/social_media/tree/main/social-media/report/unit_test_coverage
 
-Analytics 
+# Analytics 
 
-Active Users Count
+## Active Users Count
 
 http://localhost:3000/api/active-user?unit=minute
 
@@ -72,7 +72,7 @@ http://localhost:3000/api/active-user?unit=hour
 
 http://localhost:3000/api/active-user?unit=day
 
-Popular Posts:
+## Popular Posts:
 
 http://localhost:3000/api/popular-post?unit=day
 
@@ -80,7 +80,7 @@ http://localhost:3000/api/popular-post?unit=minute
 
 http://localhost:3000/api/popular-post?unit=hour
 
-Curl command to share some post
+## Curl command to share some post
 
 ```
 curl --location 'http://localhost:3000/api/handleEvent' \
@@ -95,13 +95,13 @@ curl --location 'http://localhost:3000/api/handleEvent' \
 possible value of event type
 ['like', 'unlike', 'share', 'comment', 'login', 'logout', 'delete_comment']
 
-Reports and Documentation 
+# Reports and Documentation 
 
-To check api responses for relevent end points check below path
+## To check api responses for relevent end points check below path
 
 https://github.com/chandan-123kumar/social_media/tree/main/social-media/report/api_response
 
-To see the api response time analytics check 
+## To see the api response time analytics check 
 
 https://github.com/chandan-123kumar/social_media/tree/main/social-media/report/api_response_time_analytics
 
