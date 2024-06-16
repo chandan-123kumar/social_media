@@ -47,7 +47,8 @@ node automation/script.js
 
 # Monitor queue
 http://localhost:15672/#/queues
-
+#Monitor log file
+root_dir/log/...
 # Unit Test
 
 Run
